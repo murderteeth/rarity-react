@@ -47,6 +47,7 @@ Open `config.json` and spec out your ftmscan settings and expansions. Here's an 
 - Add some wallet code like this
 ```tsx
 import { useWeb3 } from 'rarity-react'
+import config from './config.json'
 export default function() {
   const { initialized, active, connect } = useWeb3()
   return <>
