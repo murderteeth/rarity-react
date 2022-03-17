@@ -10,8 +10,8 @@ import { RarityExpansion } from './RarityExpansion';
 import { SideExpansionsContext } from './SideExpansionsContext';
 
 function Main({ children } : { children: any }) {
-  const { summoners } = useFetchSummoners();
-  return <SummonersContext.Provider value={{ summoners }}>
+  const { summoners, loading } = useFetchSummoners();
+  return <SummonersContext.Provider value={{ summoners, loading }}>
       {children}
     </SummonersContext.Provider>;
 }

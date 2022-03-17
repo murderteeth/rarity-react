@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "craco start",
+    "start": "cd ../ && yarn build && cd example/ && yarn add link:.. && craco start",
     "build": "craco build",
     "test": "craco test",
     "eject": "craco eject"

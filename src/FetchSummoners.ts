@@ -12,6 +12,7 @@ const useFetchSummoners = () => {
   const { config } = useRarityConfig();
   const expansions = useRarityExpansions();
 	const [ summoners, setSummoners ] = useState<Summoner[]>([]);
+  const [ loading, setLoading ] = useState<boolean>(true);
   const	{ address, active, provider } = useWeb3();
 
   const getSummonersUri = 
@@ -65,12 +66,13 @@ const useFetchSummoners = () => {
         });
 
         setSummoners(freshies);
+        setLoading(false);
       })();
 
     }
 	}, [data]);
 
-  return { summoners };
+  return { summoners, loading };
 };
 
 export default useFetchSummoners;

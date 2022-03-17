@@ -7,7 +7,12 @@ import config from './config.json'
 const Main = () => {
   const { address, active, connect, walletType } = useWeb3()
   const walletConnected = useWalletConnected()
-  const { summoners } = useSummoners()
+  const { loading, summoners } = useSummoners()
+
+  // const expansions = useExpansions(['core', 'gold'])
+  // const { called, loading, data, fetchMore, error } = useSummoners(expansions)
+
+  console.log('loading, summoners', loading, summoners)
 
   useEffect(() => {
     if(address && !active) {
@@ -20,7 +25,7 @@ const Main = () => {
   }
 
   return <div className="h-screen flex flex-col">
-    <header className="flex flex-wrap justify-center items-center py-6 px-16 shadow">
+    <header className="flex flex-wrap justify-center items-center py-6 px-16">
       <h1 className="w-1/3 font-brand text-4xl font-bold tracking-tighter">rarity-react</h1>
       <div className="w-1/3 flex justify-center"></div>
       <div className="w-1/3 flex justify-end">
@@ -28,11 +33,15 @@ const Main = () => {
       </div>
     </header>
 
-    {!walletConnected && <main className="flex-grow flex justify-center items-center px-12">
+    {loading && <div>
+      LOADING !!
+    </div>}
+
+    {!loading && !walletConnected && <main className="flex-grow flex justify-center items-center px-12">
       <button onClick={clickConnect} className="bg-yellow-400 hover:bg-yellow-200 text-3xl py-4 px-12 rounded-full">Connect MetaMask</button>
     </main>}
 
-    {walletConnected && <main className="flex-grow flex justify-center items-start px-12 py-6">
+    {!loading && walletConnected && <main className="flex-grow flex justify-center items-start px-12 py-6">
       <div className="flex flex-wrap">
         {summoners.map((summoner) => (
           <div key={summoner.tokenId.toString()} className="w-1/4 h-64 p-2">
